@@ -161,6 +161,7 @@ TARGET_POWERHAL_VARIANT := qcom
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
+<<<<<<< HEAD
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/sepolicy
 
@@ -198,6 +199,11 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Time services
 # BOARD_USES_QC_TIME_SERVICES := true
+=======
+
+#BOARD_SEPOLICY_DIRS += \
+#    $(DEVICE_PATH)/sepolicy
+>>>>>>> b133b0e... Remov selinux for now
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true

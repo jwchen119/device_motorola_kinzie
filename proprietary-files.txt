@@ -26,7 +26,7 @@ vendor/lib/rfsa/adsp/libmare_hexagon_skel.so
 bin/fm_qsoc_patches
 vendor/bin/audioflacapp
 lib/libaudioroute.so
-lib/hw/audio.primary.msm8992.so
+lib/hw/audio.primary.msm8994.so
 lib/hw/audio.motvr.default.so
 lib/libmotaudioutils.so
 lib/libtinyalsa.so
@@ -111,7 +111,7 @@ etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
-lib/hw/camera.msm8992.so
+lib/hw/camera.msm8994.so
 lib/libadvalgcore.so
 lib/libAisAdapter.so
 lib/libAlAisLib.so
@@ -148,26 +148,26 @@ vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_isp_demosaic44.so
 vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera_isp_be_stats44.so
-vendor/lib/libmmcamera_isp_bg_stats44.so
-vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
-vendor/lib/libmmcamera_isp_cs_stats44.so
-vendor/lib/libmmcamera_isp_bf_scale_stats44.so
-vendor/lib/libmmcamera_isp_clf44.so
-vendor/lib/libmmcamera_isp_fovcrop_encoder40.so
-vendor/lib/libmmcamera_isp_fovcrop_viewfinder40.so
-vendor/lib/libmmcamera_isp_ihist_stats44.so
+vendor/lib/libmmcamera_isp_bg_stats46.so
+vendor/lib/libmmcamera_isp_color_xform_viewfinder46.so
+vendor/lib/libmmcamera_isp_cs_stats46.so
+vendor/lib/libmmcamera_isp_bf_scale_stats46.so
+vendor/lib/libmmcamera_isp_clf46.so
+vendor/lib/libmmcamera_isp_fovcrop_encoder46.so
+vendor/lib/libmmcamera_isp_fovcrop_viewfinder46.so
+vendor/lib/libmmcamera_isp_ihist_stats46.so
 vendor/lib/libmmcamera_isp_luma_adaptation40.so
-vendor/lib/libmmcamera_isp_rs_stats44.so
-vendor/lib/libmmcamera_isp_scaler_encoder44.so
-vendor/lib/libmmcamera_isp_scaler_viewfinder44.so
-vendor/lib/libmmcamera_isp_wb40.so
+vendor/lib/libmmcamera_isp_rs_stats46.so
+vendor/lib/libmmcamera_isp_scaler_encoder46.so
+vendor/lib/libmmcamera_isp_scaler_viewfinder46.so
+vendor/lib/libmmcamera_isp_wb46.so
 vendor/lib/libmmcamera_mot_imx230.so
 vendor/lib/libmmcamera_omnivision_ov5693_eeprom.so
 vendor/lib/libmmcamera_ov5693.so
 vendor/lib/libmmcamera_sony_imx230_eeprom.so
 vendor/lib/libmmcamera_vstab_module.so
-vendor/lib/libmmcamera_isp_color_xform_encoder40.so
-vendor/lib/libmmcamera_isp_color_correct40.so
+vendor/lib/libmmcamera_isp_color_xform_encoder46.so
+vendor/lib/libmmcamera_isp_color_correct46.so
 vendor/lib/libmmcamera_isp_demux40.so
 vendor/lib/libmmcamera_eztune_module.so
 vendor/lib/libmmcamera2_is.so
@@ -398,7 +398,7 @@ bin/dbvc_atvc_property_set
 bin/hardware_revisions.sh
 
 # NFC
-etc/firmware/BCM20795A2_001.003.025.0005.0035_Generic_I2C_NCD_Signed_configdata.ncd
+etc/firmware/BCM20795A2_001.003.025.0005.0048_Generic_I2C_NCD_Unsigned_configdata.ncd
 # Postprocessing
 bin/mm-pp-daemon
 vendor/lib/libmm-abl.so
@@ -466,7 +466,7 @@ etc/permissions/cneapiclient.xml
 etc/permissions/com.motorola.hw.sensorhub.xml
 etc/permissions/com.motorola.motosignature.xml
 etc/permissions/com.quicinc.cne.xml
-etc/permissions/com.verizon.ims.xml
+#etc/permissions/com.verizon.ims.xml
 etc/permissions/ims.xml
 etc/permissions/org.simalliance.openmobileapi.xml
 etc/permissions/qcnvitems.xml
@@ -474,7 +474,7 @@ etc/permissions/qcrilhook.xml
 etc/sensors/sensor_def_qcomdev.conf
 framework/qcnvitems.jar
 framework/qcrilhook.jar
-framework/com.verizon.ims.jar
+#framework/com.verizon.ims.jar
 framework/org.simalliance.openmobileapi.jar
 lib/libadspd.so
 lib/libmdmcutback.so
@@ -493,26 +493,26 @@ vendor/lib/libxml.so
 vendor/lib/libperipheral_client.so
 
 # Touchscreen firmware
-etc/firmware/synaptics-s2726-15052160-1d19d9-clark.tdat
-etc/firmware/synaptics-s3528-15071401-1e29b4-clark.tdat
-etc/firmware/synaptics-s3528ar-15071401-1e29b4-clark.tdat
+etc/firmware/synaptics-s3528-15070602-1def27-kinzie.tdat
+etc/firmware/synaptics-s3528ks-14102100-1a96a7-kinzie.tdat
+/etc/firmware/synaptics-s3528ks2-15070602-1def27-kinzie.tdat
 
 # Sensors
 vendor/lib/libsensor_reg.so
 bin/motosh
 etc/firmware/sensorhubfw.bin
-lib/hw/sensors.msm8992.so
+lib/hw/sensors.msm8994.so
 vendor/lib/libsubsystem_control.so
 vendor/lib/libSubSystemShutdown.so
-lib64/hw/sensorhub.msm8992.so
+lib64/hw/sensorhub.msm8994.so
 
 # Time (Linked to radio)
 -app/TimeService/TimeService.apk
 bin/time_daemon
 vendor/lib/libTimeService.so
--vendor/lib/libtime_geoff.so
+-vendor/lib/libtime_genoff.so
 vendor/lib/hw/flp.default.so
-vendor/lib/hw/activity_recognition.msm8992.so
+vendor/lib/hw/activity_recognition.msm8994.so
 vendor/lib/egl/libQTapGLES.so
 
 # Wifi Firmware

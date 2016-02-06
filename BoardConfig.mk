@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/motorola/clark
+DEVICE_PATH := device/motorola/kinzie
 
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_SMP := true
@@ -46,8 +46,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/motorola/msm8992
-TARGET_KERNEL_CONFIG := clark_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola-msm
+TARGET_KERNEL_CONFIG := kinzie_defconfig
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_ARCH := arm64
@@ -57,8 +57,8 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 an
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset BOARD_RAMDISK_OFFSET --tags_offset BOARD_KERNEL_TAGS_OFFSET
 
 TARGET_NO_RADIOIMAGE := true
-TARGET_BOARD_PLATFORM := msm8992
-TARGET_BOOTLOADER_BOARD_NAME := clark
+TARGET_BOARD_PLATFORM := msm8994
+TARGET_BOOTLOADER_BOARD_NAME := kinzie
 TARGET_NO_RPC := true
 TARGET_USES_LOGD := true
 
@@ -194,8 +194,8 @@ BOARD_SEPOLICY_UNION += \
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_clark
-TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_clark.c
+TARGET_INIT_VENDOR_LIB := libinit_kinzie
+TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_kinzie.c
 
 # TWRP definitions
 DEVICE_RESOLUTION := 1440x2560

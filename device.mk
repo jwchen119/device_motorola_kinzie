@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL clark devices, and
-# are also specific to clark devices
+# This file includes all definitions that apply to ALL kinzie devices, and
+# are also specific to kinzie devices
 #
 # Everything in this directory will become public
 
@@ -29,12 +29,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/qcril.db:system/etc/motorola/qcril.db
 
-# Input device files for clark
+# Input device files for kinzie
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-clark.conf:system/etc/thermal-engine-clark.conf
+    $(LOCAL_PATH)/configs/thermal-engine-kinzie.conf:system/etc/thermal-engine-kinzie.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qmi_config.xml:system/etc/data/qmi_config.xml \
@@ -82,7 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8992
+    power.msm8994
 
 PRODUCT_PACKAGES += \
     libaudio-resampler \
@@ -101,7 +101,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.clark \
+    camera.kinzie \
     libqomx_core \
     libmmcamera_interface \
     libmmjpeg_interface \
@@ -143,10 +143,10 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    gralloc.msm8992 \
-    hwcomposer.msm8992 \
-    copybit.msm8992 \
-    memtrack.msm8992 \
+    gralloc.msm8994 \
+    hwcomposer.msm8994 \
+    copybit.msm8994 \
+    memtrack.msm8994 \
     liboverlay \
     libqdutils \
     libqdMetaData
@@ -171,12 +171,12 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8992
+    lights.msm8994
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.msm8992 \
-    audio_policy.msm8992 \
+    audio.primary.msm8994 \
+    audio_policy.msm8994 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default
@@ -209,9 +209,9 @@ PRODUCT_PACKAGES += \
 
 # Wifi Firmware
 PRODUCT_COPY_FILES += \
-    kernel/motorola/msm8992/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat \
-    kernel/motorola/msm8992/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_qcom_cfg.usb.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.usb.ini \
-    kernel/motorola/msm8992/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
+    kernel/motorola-msm/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat \
+    kernel/motorola-msm/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_qcom_cfg.usb.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.usb.ini \
+    kernel/motorola-msm/drivers/staging/qcacld-2.0/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
@@ -226,7 +226,7 @@ PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf \
 
 PRODUCT_PACKAGES += \
-    gps.msm8992 \
+    gps.msm8994 \
     flp.conf \
     gps.conf \
     izat.conf \
@@ -266,6 +266,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
+
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    persist.sys.usb.config=adb \
+    persist.service.adb.enable=1 \
+    ro.secure=0 \
+    ro.adb.secure=0
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)

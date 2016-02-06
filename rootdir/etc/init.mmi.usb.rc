@@ -142,9 +142,12 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/idVendor 22b8
     write /sys/class/android_usb/android0/idProduct ${ro.usb.mtp}
-    write /sys/class/android_usb/android0/functions mtp
+    write /sys/class/android_usb/android0/functions mtp,adb
     write /sys/class/android_usb/android0/enable 1
-    setprop sys.usb.state ${sys.usb.config}
+
+    start adbd
+
+    setprop sys.usb.state ${sys.usb.config},adb
 
 on property:sys.usb.config=mtp,adb
     start tcmd

@@ -5,7 +5,7 @@ on charger
     trigger fs
     trigger post-fs
     trigger post-fs-data
-    setprop ro.board.platform msm8992
+    setprop ro.board.platform msm8994
     # setprop sys.perf.profile 0
     start charge_only_mode
     start batt_health

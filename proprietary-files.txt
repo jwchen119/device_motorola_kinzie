@@ -56,7 +56,7 @@ etc/acdbdata/Speaker_cal.acdb
 etc/firmware/florida-dsp2-aov-frontend.wmfw
 etc/firmware/florida-dsp3-aov-control.wmfw
 
-# Audio firmware
+# Audio firmware -- no "right.*" mono speaker device
 etc/firmware/left.tfa9890.music.config
 etc/firmware/left.tfa9890.music.eq
 etc/firmware/left.tfa9890.ringtone.config
@@ -69,18 +69,6 @@ etc/firmware/left.tfa9890_n1b12.patch
 etc/firmware/left.tfa9890_n1c2.patch
 etc/firmware/left.tfa9890_ringtone_table.preset
 etc/firmware/left.tfa9890_voice_table.preset
-etc/firmware/right.tfa9890.music.config
-etc/firmware/right.tfa9890.music.eq
-etc/firmware/right.tfa9890.ringtone.config
-etc/firmware/right.tfa9890.ringtone.eq
-etc/firmware/right.tfa9890.speaker
-etc/firmware/right.tfa9890.voice.config
-etc/firmware/right.tfa9890.voice.eq
-etc/firmware/right.tfa9890_music_table.preset
-etc/firmware/right.tfa9890_n1b12.patch
-etc/firmware/right.tfa9890_n1c2.patch
-etc/firmware/right.tfa9890_ringtone_table.preset
-etc/firmware/right.tfa9890_voice_table.preset
 etc/firmware/vrgain.bin
 
 # Battery
@@ -156,7 +144,7 @@ vendor/lib/libmmcamera_isp_clf46.so
 vendor/lib/libmmcamera_isp_fovcrop_encoder46.so
 vendor/lib/libmmcamera_isp_fovcrop_viewfinder46.so
 vendor/lib/libmmcamera_isp_ihist_stats46.so
-vendor/lib/libmmcamera_isp_luma_adaptation40.so
+#vendor/lib/libmmcamera_isp_luma_adaptation40.so
 vendor/lib/libmmcamera_isp_rs_stats46.so
 vendor/lib/libmmcamera_isp_scaler_encoder46.so
 vendor/lib/libmmcamera_isp_scaler_viewfinder46.so
@@ -285,7 +273,7 @@ vendor/lib/libmm-als.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmm-disp-apis.so
 vendor/lib/libmm-qdcm.so
-vendor/lib/libsd_sdk_display.so
+#vendor/lib/libsd_sdk_display.so
 
 # QMI
 bin/ATFWD-daemon
@@ -432,7 +420,7 @@ vendor/lib/libvendorconn.so
 vendor/lib/libwqe.so
 
 # Radio
--app/ims/ims.apk
+#-app/ims/ims.apk    #not present in kinzie
 -app/atfwd/atfwd.apk
 bin/charge_only_mode
 bin/diag_klog
@@ -467,7 +455,7 @@ etc/permissions/com.motorola.hw.sensorhub.xml
 etc/permissions/com.motorola.motosignature.xml
 etc/permissions/com.quicinc.cne.xml
 #etc/permissions/com.verizon.ims.xml
-etc/permissions/ims.xml
+#etc/permissions/ims.xml      #not present in kinzie
 etc/permissions/org.simalliance.openmobileapi.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
@@ -480,10 +468,10 @@ lib/libadspd.so
 lib/libmdmcutback.so
 lib/libmotext_inf.so
 lib/libqmimotext.so
--priv-app/MotoSignatureApp/MotoSignatureApp.apk
+-app/MotoSignatureApp/MotoSignatureApp.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/lib/libimscamera_jni.so
-vendor/lib/libimsmedia_jni.so
+#vendor/lib/libimsmedia_jni.so  #not present in kinzie
 vendor/lib/libmdmdetect.so
 vendor/lib/libnetmgr.so
 vendor/lib/libril-qc-qmi-1.so
@@ -495,7 +483,7 @@ vendor/lib/libperipheral_client.so
 # Touchscreen firmware
 etc/firmware/synaptics-s3528-15070602-1def27-kinzie.tdat
 etc/firmware/synaptics-s3528ks-14102100-1a96a7-kinzie.tdat
-/etc/firmware/synaptics-s3528ks2-15070602-1def27-kinzie.tdat
+etc/firmware/synaptics-s3528ks2-15070602-1def27-kinzie.tdat
 
 # Sensors
 vendor/lib/libsensor_reg.so

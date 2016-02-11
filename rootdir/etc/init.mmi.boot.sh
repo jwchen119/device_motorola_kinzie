@@ -1,10 +1,5 @@
 #!/system/bin/sh
 
-# HACK - if Atmel probed, flip display
-if [ -d "/sys/bus/i2c/devices/2-004a/input" ]; then
-    setprop ro.sf.lcd_inverted 1
-fi
-
 # We take this from cpuinfo because hex "letters" are lowercase there
 set -A cinfo `cat /proc/cpuinfo | /system/bin/grep Revision`
 hw=${cinfo[2]#?}

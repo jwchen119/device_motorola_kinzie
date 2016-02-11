@@ -305,6 +305,7 @@ vendor/lib/libvoice-svc.so
 bin/loc_launcher
 bin/gpsone_daemon
 bin/location-mq
+etc/izat.conf
 etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
 lib/libloc_ds_api.so

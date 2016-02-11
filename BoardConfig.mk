@@ -45,7 +45,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/motorola-msm
+TARGET_KERNEL_SOURCE := kernel
 TARGET_KERNEL_CONFIG := kinzie_defconfig
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
@@ -192,6 +192,9 @@ BOARD_SEPOLICY_UNION += \
     usb_uicc_daemon.te\
     vold.te \
     wcnss_filter.te
+
+# Camera
+USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Time services
 # BOARD_USES_QC_TIME_SERVICES := true

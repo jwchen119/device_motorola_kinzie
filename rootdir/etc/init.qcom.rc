@@ -571,7 +571,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
 service dhcpcd_wlan0 /system/bin/dhcpcd -G
     class late_start
     disabled
-    oneshotf
+    oneshot
 
 service ftm_ffbm /system/bin/ftmdaemon
     user system

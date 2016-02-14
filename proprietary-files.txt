@@ -329,6 +329,7 @@ vendor/lib/libulp2.so
 lib/libloc_eng.so
 lib/libgps.utils.so
 lib/libloc_core.so
+lib/hw/gps.default.so
 
 # Adreno GPU
 etc/firmware/a225p5_pm4.fw

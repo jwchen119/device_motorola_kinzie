@@ -1,3 +1,7 @@
 allow bluetooth firmware_file:dir search;
 allow bluetooth firmware_file:file { read open getattr };
 allow bluetooth wcnss_filter:unix_stream_socket connectto;
+
+#allow bluetooth self:capability { dac_override setgid setuid };
+allow bluetooth proc_sysrq:file { read write };
+allow bluetooth sysfs_msmuart_file:file { read write open };

@@ -13,3 +13,7 @@ allow batt_health self:netlink_kobject_uevent_socket read;
 allow batt_health self:netlink_kobject_uevent_socket { bind create setopt };
 allow batt_health sysfs_thermal:dir { search read open };
 allow batt_health sysfs_thermal:file { read open };
+
+allow batt_health cache_file:dir rw_dir_perms;
+allow batt_health cache_file:file { read write create append open unlink setattr };
+

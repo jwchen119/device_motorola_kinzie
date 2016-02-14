@@ -239,4 +239,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #CM updater
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.device=kinzie \
-    ro.build.product= kinzie
+    ro.build.product=kinzie

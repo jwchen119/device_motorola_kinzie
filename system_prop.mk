@@ -235,3 +235,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tethering.noprovisioning=true
+
+#CM updater
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.device=kinzie \
+    ro.build.product=kinzie

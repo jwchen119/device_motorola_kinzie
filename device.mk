@@ -125,7 +125,7 @@ PRODUCT_PACKAGES += \
 ## Below here are confirmed important things 
 ## Do not edit
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/twrp.fstab:recovery/root/etc/twrp.fstab
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 PRODUCT_PACKAGES += \
     init.class_main.sh \

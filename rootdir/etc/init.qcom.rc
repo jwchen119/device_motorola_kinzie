@@ -568,7 +568,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -G
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
     class late_start
     disabled
     oneshot
@@ -599,7 +599,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -G
+service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
 
@@ -714,6 +714,12 @@ service ril-daemon3 /system/bin/rild -c 3
     user root
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
+
+service rild2-wrapper /system/bin/sh /system/etc/init.qcom.ril.sh
+    class late_start
+    user root
+    group root
+    oneshot
 
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated

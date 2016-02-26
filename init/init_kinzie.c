@@ -35,6 +35,9 @@
 #include "log.h"
 #include "util.h"
 
+static void setSsim(void);
+static void setMsim(void);
+
 void vendor_load_properties()
 {
     char platform[PROP_VALUE_MAX];
@@ -57,26 +60,29 @@ void vendor_load_properties()
         property_set("telephony.lteOnCdmaDevice", "0");
         // Region specifics
         if (strstr(car, "retin")) {
-            // India -- probably doesnt exist for kinzie
-            property_set("persist.radio.multisim.config", "dsds");
-            property_set("persist.radio.plmn_name_cmp", "1");
-            property_set("ro.telephony.ril.config", "simactivation");
-            property_set("ro.fsg-id", "emea_dsds");
+            // India
+            setMsim();
             property_set("ro.build.description", "clark_retasia_ds-user 6.0 MPH24.49-18 18 release-keys");
             property_set("ro.build.fingerprint", "motorola/clark_retasia_ds/clark_ds:6.0/MPH24.49-18/18:user/release-keys");
-        } else if (strstr(car, "reteu")) {
-            //UK/EU  need to retrieve data from stock fw 
+        } else if (strstr(car, "reteu") || strstr(car, "retgb")) {
+            //EU  need to retrieve data from stock fw 
+			setSsim();
             property_set("ro.build.description", "kinzie_reteu-user 5.1.1 LPK23.145-5 6 release-keys");
             property_set("ro.build.fingerprint", "motorola/kinzie_reteu/kinzie:5.1.1/LPK23.145-5/6:user/release-keys");
-        } else if (strstr(car, "retla")) {
-            //BRAZIL need to retrieve data from stock fw 
-            property_set("ro.build.description", "kinzie_reteu-user 5.1.1 LPK23.145-5 6 release-keys");
-            property_set("ro.build.fingerprint", "motorola/kinzie_reteu/kinzie:5.1.1/LPK23.145-5/6:user/release-keys");
-        } else if (strstr(car, "retmx")) {
-            //MEXICO need to retrieve data from stock fw 
-            property_set("ro.build.description", "kinzie_reteu-user 5.1.1 LPK23.145-5 6 release-keys");
-            property_set("ro.build.fingerprint", "motorola/kinzie_reteu/kinzie:5.1.1/LPK23.145-5/6:user/release-keys");
-        } 
+			property_set("ro.fsg-id", "emea");
+        } else if (strstr(car, "retla") || strstr(car, "retmx") || strstr(car, "retbr")) {
+			// LATAM - Mexico, Brazil
+			setMsim();
+			property_set("ro.build.version.full","Blur_Version.23.11.5.kinzie_retla_ds.retla.en.01");
+			property_set("ro.build.description","kinzie_retla_ds-user 5.1.1 LPK23.145-5 6 release-keys");
+			property_set("ro.build.fingerprint","motorola/kinzie_retla_ds/kinzie_uds:5.1.1/LPK23.145-5/6:user/release-keys");
+
+			property_set("ro.gsm.data_retry_config","default_randomization=2000,max_retries=infinite,1000,1000,80000,125000,485000,905000");
+			property_set("persist.radio.process_sups_ind","1");
+			property_set("persist.radio.all_bc_msg","all");
+			property_set("persist.radio.mot_ecc_enabled","1");
+			property_set("persist.radio.force_get_pref","1");
+		}
     } else if (strstr(sku, "XT1581")) {
         // CHINA need to retrieve data from stock fw 
         property_set("ro.product.display", "Moto X Force");
@@ -95,5 +101,58 @@ void vendor_load_properties()
         property_set("telephony.lteOnCdmaDevice", "1");
         property_set("ro.build.description", "clark_retus-user 6.0 MPH24.49-18 18 release-keys");
         property_set("ro.build.fingerprint", "motorola/clark_retus/clark:6.0/MPH24.49-18/18:user/release-keys");
+		property_set("persist.radio.apn_delay","5000");
     }
+}
+
+static void setSsim(void)
+{
+    property_set("persist.cne.feature", "0");
+    property_set("ro.media.enc.aud.fileformat", "qcp");
+    property_set("ro.media.enc.aud.codec", "qcelp");
+    property_set("ro.media.enc.aud.bps", "13300");
+    property_set("ro.media.enc.aud.ch", "1");
+    property_set("ro.media.enc.aud.hz", "8000");
+    property_set("persist.rmnet.mux", "enabled");
+    property_set("persist.sys.cnd.iwlan", "0");
+    property_set("persist.cne.logging.qxdm", "0");
+    property_set("persist.vt.supported", "0");
+    property_set("persist.eab.supported", "0");
+    property_set("persist.radio.snapshot_timer", "22");
+    property_set("persist.radio.snapshot_enabled", "1");
+    property_set("persist.ims.volte", "true");
+    property_set("persist.ims.vt", "false");
+    property_set("persist.ims.vt.epdg", "false");
+    property_set("persist.ims.disableADBLogs", "2");
+    property_set("persist.ims.disableDebugLogs", "0");
+    property_set("persist.ims.disableQXDMLogs", "0");
+    property_set("persist.ims.disableIMSLogs", "0");
+    property_set("persist.rcs.supported", "0");
+    property_set("persist.rcs.presence.provision", "0");
+    property_set("persist.radio.calls.on.ims", "true");
+    property_set("persist.radio.jbims", "1");
+    property_set("persist.radio.domain.ps", "0");
+    property_set("persist.radio.VT_ENABLE", "1");
+    property_set("persist.radio.VT_HYBRID_ENABLE", "1");
+    property_set("persist.radio.ROTATION_ENABLE", "1");
+    property_set("persist.radio.REVERSE_QMI", "0");
+    property_set("persist.radio.RATE_ADAPT_ENABLE", "1");
+    property_set("persist.radio.VT_USE_MDM_TIME", "0");
+    property_set("persist.radio.videopause.mode", "0");
+    property_set("persist.data.iwlan.enable", "false");
+    property_set("persist.radio.mcfg_enabled", "1");
+    property_set("ro.mot.ignore_csim_appid", "true");
+    property_set("persist.data.netmgrd.qos.enable", "true");
+    property_set("ril.subscription.types", "RUIM");
+}
+
+static void setMsim(void)
+{
+    property_set("persist.radio.multisim.config", "dsds");
+    property_set("persist.radio.plmn_name_cmp", "1");
+    property_set("ro.telephony.ril.config", "simactivation");
+    property_set("ro.fsg-id", "emea_dsds");
+    property_set("ro.media.enc.aud.fileformat", "amr");
+    property_set("ro.media.enc.aud.codec", "amrnb");
+	property_set("ril.subscription.types", "NV,RUIM");
 }

@@ -49,6 +49,11 @@ on boot
     write /sys/module/g_android/parameters/mtp_rx_req_len 524288
     write /sys/module/g_android/parameters/mtp_tx_req_len 524288
 
+on early-boot
+    # boot with max freq, will be reset in post_boot script
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1555200
+    exec /system/bin/sh /init.mmi.early_boot.sh
+
 on charger
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 22B8
@@ -57,11 +62,136 @@ on charger
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/android0/enable 1
 
+	trigger early-fs
+    trigger fs
+    trigger post-fs
+    trigger post-fs-data
+    trigger moto-charger
+
+on moto-charger
+    setprop ro.board.platform msm8994
+    start  qcom-post-boot
+    start charge_only_mode
+    start batt_health
+    start thermal-com
+
 on fs
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     write /sys/class/android_usb/android0/f_ffs/aliases adb
+
+on post-fs
+    mkdir /persist/camera 02755 mot_tcmd mot_tcmd
+    mkdir /persist/camera/ledcal 02755 camera mot_tcmd
+    mkdir /persist/factory 0755 mot_tcmd mot_tcmd
+    mkdir /persist/public 0755 mot_tcmd mot_tcmd
+    mkdir /persist/public/atvc 0770 mot_atvc shell
+    mkdir /persist/public/battd 0755 mot_accy mot_tcmd
+    mkdir /persist/public/hiddenmenu 0755 radio radio
+    mkdir /persist/public/hiddenmenu/data 0775 system mot_tcmd
+    mkdir /persist/public/locale 0700 system system
+    mkdir /persist/public/omadm 0700 radio radio
+    mkdir /persist/public/svcs 0770 system system
+    mkdir /persist/wifi 0755 mot_tcmd mot_tcmd
+    mkdir /persist/bt 0755 mot_tcmd bluetooth
+    mkdir /persist/wmdrm 0775 mot_drm mot_drm
+    mkdir /persist/batt_health 0755 mot_pwric mot_pwric
+    mkdir /persist/mdm 0770 radio radio
+
+    chown mot_tcmd mot_tcmd /persist/factory/fti
+    chmod 0660 /persist/factory/fti
+    chown mot_tcmd mot_tcmd /persist/factory/byte
+    chmod 0660 /persist/factory/byte
+    chmod 0660 /persist/wifi/wlan_mac.bin
+    chown mot_tcmd mot_tcmd /persist/bt/bt_bdaddr
+    chmod 0664 /persist/bt/bt_bdaddr
+    chmod 0600 /persist/whisper/whisper_only/vector0.bin
+
+    # ensure /persist/antcap exists and has correct permissions for motosh to access
+    mkdir /persist/antcap 0755 mot_tcmd mot_tcmd
+    chown mot_tcmd mot_tcmd /persist/antcap
+    chmod 0755              /persist/antcap
+
+    # move /persist/captouch_caldata.bin to /persist/antcap (if necessary)
+    copy  /persist/captouch_caldata.bin /persist/antcap/captouch_caldata.bin
+    chown mot_tcmd mot_tcmd /persist/antcap/captouch_caldata.bin
+    chmod 0644              /persist/antcap/captouch_caldata.bin
+    rm    /persist/captouch_caldata.bin
+
+    # move /persist/captouch_basedata.bin to /persist/antcap (if necessary)
+    copy  /persist/captouch_basedata.bin /persist/antcap/captouch_basedata.bin
+    chown mot_tcmd mot_tcmd /persist/antcap/captouch_basedata.bin
+    chmod 0644              /persist/antcap/captouch_basedata.bin
+    rm    /persist/captouch_basedata.bin
+
+    # Permissions CapSense firmware update & reset
+    chown mot_tcmd mot_tcmd /sys/class/capsense/fw_update
+    chmod 0660 /sys/class/capsense/fw_update
+    chown mot_tcmd mot_tcmd /sys/class/capsense/reset
+    chmod 0660 /sys/class/capsense/reset
+
+    swapon_all fstab.qcom
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/swappiness 100
+
+on post-fs-data
+
+    # Setup folders for security
+    mkdir /persist/security 02770 mot_tpapi mot_tpapi
+    mkdir /data/local/dbvc 0750 mot_tcmd shell
+
+    # Setup folder for native to transfer data to NativeDropBoxAgent
+    mkdir /data/system/dropbox-add 0730 system diag
+
+    # Create directory used by power_supply_logger
+    mkdir /data/power_supply_logger 0750 mot_pwric log
+
+    # Permissions for Factory Test of Charging Paths
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_auto_enable
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_ibatt
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_itrick
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_iusb
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_usb_suspend
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_fail_clear
+    chown mot_pwric mot_pwric /sys/class/power_supply/battery/device/force_chg_usb_otg_ctl
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_auto_enable
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_ibatt
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_itrick
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_iusb
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_usb_suspend
+    chown mot_pwric mot_pwric /sys/class/power_supply/usb-parallel/device/force_chg_fail_clear
+
+    # Create directory for cutback
+    mkdir /data/misc/cutback 0770 radio wifi
+
+    # Subsystem RAM-dumps
+    mkdir /data/ss-ram-dumps 0750 radio log
+    mkdir /data/ss-ram-dumps/bp-dumps 0750 radio log
+    mkdir /data/ss-ram-dumps/riva-dumps 0750 radio log
+
+    # folder for Blueooth ramdump
+    mkdir /data/bt-ram-dumps 0750 bluetooth log
+
+    # Change ownership of aov related sysfs entries
+    chown audio audio /sys/kernel/aov/trigger
+    chown audio audio /sys/kernel/aov/register
+    chown audio audio /sys/kernel/aov/event
+
+    # Create directory for adspd
+    mkdir /data/adspd/ 0770 audio diag
+
+    # Sensor Hub calibration data directory
+    mkdir /data/misc/sensorhub 0770 system compass
+
+    # Setup folder for camera HAL subsystem
+    mkdir /data/camera_dump 0750 media media
+
+    # SD card encryption metadata
+    mkdir /data/misc/sds 0750 root root
+
+    # Create bug2go folder
+    mkdir /data/bug2go 0750 log log
 
 service mmi-usb-sh /system/bin/sh /init.mmi.usb.sh
     class core

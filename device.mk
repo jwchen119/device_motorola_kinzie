@@ -35,7 +35,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-kinzie.conf:system/etc/thermal-engine-kinzie.conf
+    $(LOCAL_PATH)/configs/thermal-engine-kinzie.conf:system/etc/thermal-engine-kinzie.conf \
+$(LOCAL_PATH)/configs/thermal-engine-kinzie.conf:system/etc/thermal-engine-kinzie2pc.conf \
+$(LOCAL_PATH)/configs/thermal-engine-kinzie.conf:system/etc/thermal-engine-kinziep3.conf 
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qmi_config.xml:system/etc/data/qmi_config.xml \

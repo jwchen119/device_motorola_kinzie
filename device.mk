@@ -25,7 +25,8 @@ include $(LOCAL_PATH)/system_prop.mk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:system/etc/msm_irqbalance.conf \
-	$(LOCAL_PATH)/configs/init.qcom.ril.sh:system/etc/init.qcom.ril.sh
+	$(LOCAL_PATH)/configs/init.qcom.ril.sh:system/etc/init.qcom.ril.sh \
+	$(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/qcril.db:system/etc/motorola/qcril.db

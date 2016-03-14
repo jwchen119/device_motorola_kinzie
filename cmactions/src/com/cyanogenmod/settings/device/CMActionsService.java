@@ -69,6 +69,8 @@ public class CMActionsService extends IntentService implements ScreenStateNotifi
 
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         updateState();
+
+        mDozePulseAction.action();
     }
 
     @Override

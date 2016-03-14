@@ -74,6 +74,8 @@ public class IrGestureManager {
             }
         }
 
+        Log.d(TAG, "New gestures: "+gestures);
+
         return gestures;
     }
 

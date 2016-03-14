@@ -71,6 +71,8 @@ public class IrGestureSensor implements ScreenStateNotifier, SensorEventListener
     public void onSensorChanged(SensorEvent event) {
         int gesture = (int) event.values[1];
 
+        Log.d(TAG, "Sensor changed, gesture: "+gesture);
+
         if (gesture == IR_GESTURE_SWIPE || gesture == IR_GESTURE_APPROACH)
             mSensorAction.action();
     }

@@ -137,6 +137,8 @@ int read_ir_config(struct motosh_ir_config* config, int check_version)
         return 1;
     }
 
+    ALOGD("Data: %s", (unsigned char*)config);
+
     if (check_version && (config->tuning_number < MOTOSH_IR_CONFIG_TUNING_NUMBER_MIN ||
         config->tuning_number > MOTOSH_IR_CONFIG_TUNING_NUMBER_MAX)) {
         ALOGE("%s: Found tuning number %d, but expected %d..%d!\n", __func__,
@@ -192,6 +194,8 @@ int set_ir_wake_config(int wake_config)
     }
 
     config.cmd_config = wake_config & MOTOSH_IR_WAKE_CONFIG_MASK;
+
+    ALOGD("%s: set ir wake config to 0x%x\n", __func__, config.cmd_config);
 
     if (write_ir_config(&config)) {
         goto err;

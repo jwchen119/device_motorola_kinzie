@@ -37,6 +37,7 @@
 
 static void setSsim(void);
 static void setMsim(void);
+static void setLatMsim(void);
 
 void vendor_load_properties()
 {
@@ -72,16 +73,10 @@ void vendor_load_properties()
 			property_set("ro.fsg-id", "emea");
         } else if (strstr(car, "retla") || strstr(car, "retmx") || strstr(car, "retbr")) {
 			// LATAM - Mexico, Brazil
-			setMsim();
+			setLatMsim();
 			property_set("ro.build.version.full","Blur_Version.23.11.5.kinzie_retla_ds.retla.en.01");
 			property_set("ro.build.description","kinzie_retla_ds-user 5.1.1 LPK23.145-5 6 release-keys");
 			property_set("ro.build.fingerprint","motorola/kinzie_retla_ds/kinzie_uds:5.1.1/LPK23.145-5/6:user/release-keys");
-
-			property_set("ro.gsm.data_retry_config","default_randomization=2000,max_retries=infinite,1000,1000,80000,125000,485000,905000");
-			property_set("persist.radio.process_sups_ind","1");
-			property_set("persist.radio.all_bc_msg","all");
-			property_set("persist.radio.mot_ecc_enabled","1");
-			property_set("persist.radio.force_get_pref","1");
 		}
     } else if (strstr(sku, "XT1581")) {
         // CHINA need to retrieve data from stock fw 
@@ -144,6 +139,17 @@ static void setSsim(void)
     property_set("ro.mot.ignore_csim_appid", "true");
     property_set("persist.data.netmgrd.qos.enable", "true");
     property_set("ril.subscription.types", "RUIM");
+}
+
+static void setLatMsim(void)
+{
+    property_set("ro.gsm.data_retry_config","default_randomization=2000,max_retries=infinite,1000,1000,80000,125000,485000,905000");
+    property_set("persist.radio.process_sups_ind","1");
+    property_set("persist.radio.all_bc_msg","all");
+    property_set("persist.radio.mot_ecc_enabled","1");
+    property_set("persist.radio.force_get_pref","1");
+    
+    setMsim();
 }
 
 static void setMsim(void)

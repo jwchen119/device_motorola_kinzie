@@ -49,11 +49,6 @@ on boot
     write /sys/module/g_android/parameters/mtp_rx_req_len 524288
     write /sys/module/g_android/parameters/mtp_tx_req_len 524288
 
-on early-boot
-    # boot with max freq, will be reset in post_boot script
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1555200
-    exec /system/bin/sh /init.mmi.early_boot.sh
-
 on charger
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 22B8

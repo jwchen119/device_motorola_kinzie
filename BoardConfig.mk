@@ -205,6 +205,7 @@ TARGET_INIT_VENDOR_LIB := libinit_kinzie
 TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_kinzie.c
 
 # TWRP definitions
+BOARD_HAS_FLIPPED_SCREEN:=true 
 TW_THEME := portrait_hdpi
 TW_INCLUDE_L_CRYPTO := true
 TW_TARGET_USES_QCOM_BSP := true
